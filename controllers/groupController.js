@@ -13,7 +13,7 @@ module.exports.createGroup = async (req, res, next) => {
     const user = await User.findByPk(body.userId);
 
     await newGroup.addUser(user);
-
+  
     
 
     res.send({data: newGroup})

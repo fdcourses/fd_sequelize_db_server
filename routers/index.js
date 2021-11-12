@@ -7,8 +7,6 @@ const groupRouter = require('./groupRouter');
 
 // http:localhost:3000/api ...
 router.use('/users', userRouter);
-// router.use('/tasks', taskRouter);
-router.use('/posts', postRouter);
 
 router.use('/groups', groupRouter);
 

@@ -3,13 +3,11 @@ const { Post, User } = require('../models');
 module.exports.createPost = async (req, res, next) => {
   try {
     const {
-      params: { userId },
+      userInstance,
       body,
     } = req;
 
     // const newPost = await Post.create({ userId, ...body });
-
-    const userInstance = await User.findByPk(userId);
 
     const newPost = await userInstance.createPost(body);
 
@@ -22,7 +20,7 @@ module.exports.createPost = async (req, res, next) => {
 module.exports.getUserPosts = async (req, res, next) => {
   try {
     const {
-      params: { userId },
+      userInstance
     } = req;
 
     // const userWithPosts = await User.findOne({
@@ -32,12 +30,10 @@ module.exports.getUserPosts = async (req, res, next) => {
     //   include: Post
     // });
 
-    const user = await User.findByPk(userId);
-
-    const userPosts = await user.getPosts();
+    const userPosts = await userInstance.getPosts();
 
     const userWithPosts = {
-      user,
+      userInstance,
       userPosts,
     };
 
@@ -50,16 +46,16 @@ module.exports.getUserPosts = async (req, res, next) => {
 module.exports.deletePosts = async(req, res,next) => {
   try {
     const {
-      params: { userId },
+      userInstance
     } = req;
 
-    const user = await User.findByPk(userId);
 
-    const userPosts = await user.getPosts();
+
+    const userPosts = await userInstance.getPosts();
    
     const deletedItems = await Post.destroy({
       where: {
-        userId: user.id
+        userId: userInstance.id
       }
     })
 
