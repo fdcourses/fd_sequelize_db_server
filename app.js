@@ -6,6 +6,8 @@ const bodyParser = express.json(); // data stream -> JSON -> JS object -> req.bo
 
 app.use(bodyParser);
 
+app.use(express.static('public'))
+
 app.use('/api', router);
 
 app.use(function (err, req, res, next) {
