@@ -2,10 +2,15 @@ const { User } = require('../models');
 
 module.exports.getUsers =  async (req, res, next) => {
   try {
+
+    const { pagination} = req;
     const users = await User.findAll({
       attributes: {
         exclude: ['password']
-      }
+      },
+      ...pagination
+      // limit: 4,
+      // offest: 6
     });
 
     res.send(users);

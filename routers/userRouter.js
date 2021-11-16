@@ -3,8 +3,9 @@ const UserController = require('../controllers/userController');
 const { findUser} = require('../middlewares/userMW');
 const postRouter = require('./postRouter');
 
+const { paginate} = require('../middlewares/paginationMw')
 // GET http://localhost:3000/api/users
-userRouter.get('/', UserController.getUsers);
+userRouter.get('/', paginate, UserController.getUsers);
 
 userRouter.post('/', UserController.createUser);
 
