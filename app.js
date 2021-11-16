@@ -11,8 +11,9 @@ app.use(express.static('public'))
 app.use('/api', router);
 
 app.use(function (err, req, res, next) {
+  const status = err.status || 500;
 
-  res.status(500).send({
+  res.status(status).send({
     errors: [{ message: err.message }],
   });
 });
